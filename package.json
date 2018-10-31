@@ -17,7 +17,7 @@
     "link-local": "yalc link",
     "postinstall": "yarn upgrade --pattern @tensorflow",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "homepage": "https://penny4860.github.io/web",
   "devDependencies": {
