@@ -183,6 +183,13 @@ filesElement.addEventListener('change', evt => {
 // document.getElementById :  id 속성이 주어진 문자열과 일치하는 요소를 나타내는 Element 객체를 반환
 // html document : Get <tag id == "status">
 const demoStatusElement = document.getElementById('status');
+
+// 1) demoStatusElement.innerText = msg : Assign string to html Element
+// 2) msg => demoStatusElement.innerText = msg : 
+//      define arrow function
+//      "singleParam => { statements }"
+// 3) const status = msg => demoStatusElement.innerText = msg;
+//      function status(msg) {demoStatusElement.innerText = msg;}
 const status = msg => demoStatusElement.innerText = msg;
 
 const predictionsElement = document.getElementById('predictions');
