@@ -184,6 +184,7 @@ filesElement.addEventListener('change', evt => {
 // html document : Get <tag id == "status">
 const demoStatusElement = document.getElementById('status');
 
+// Define status(msg) function
 // 1) demoStatusElement.innerText = msg : Assign string to html Element
 // 2) msg => demoStatusElement.innerText = msg : 
 //      define arrow function
