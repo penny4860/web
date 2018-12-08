@@ -185,13 +185,14 @@ filesElement.addEventListener('change', evt => {
 const demoStatusElement = document.getElementById('status');
 
 // Define status(msg) function
-// 1) demoStatusElement.innerText = msg : Assign string to html Element
-// 2) msg => demoStatusElement.innerText = msg : 
-//      define arrow function
-//      "singleParam => { statements }"
-// 3) const status = msg => demoStatusElement.innerText = msg;
-//      function status(msg) {demoStatusElement.innerText = msg;}
+// HTML 문서에서 id 를 status 로 지정한 Element에 text를 부여
 const status = msg => demoStatusElement.innerText = msg;
+/*
+function status(msg) {
+  demoStatusElement.innerText = msg;
+
+}
+*/
 
 const predictionsElement = document.getElementById('predictions');
 
