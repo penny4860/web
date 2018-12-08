@@ -10,3 +10,13 @@ If you want, you can port your own mobilenet model by using the Keras converter 
 can be found [here](https://github.com/tensorflow/tfjs-converter).
 
 [See this example live!](https://storage.googleapis.com/tfjs-examples/mobilenet/dist/index.html)
+
+
+## How to build in local machine
+
+```
+yarn
+yarn watch
+```
+
+
