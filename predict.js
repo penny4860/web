@@ -1,4 +1,5 @@
 
+const TOPK_PREDICTIONS = 10;
 
 /**
  * Given an image element, makes a prediction through mobilenet returning the

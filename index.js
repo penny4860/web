@@ -29,7 +29,7 @@ const MOBILENET_MODEL_PATH =
     'https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.25_224/model.json';
 
 const IMAGE_SIZE = 224;
-const TOPK_PREDICTIONS = 10;
+
 
 let mobilenet;
 const mobilenetDemo = async () => {
