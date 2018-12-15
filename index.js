@@ -17,9 +17,7 @@
 
 import * as tf from '@tensorflow/tfjs';
 
-
-import {write_status} from './ui';
-import {catElement, filesElement, fileContainerElement} from './doc';
+import {catElement, filesElement, fileContainerElement, write_status} from './doc';
 import {predict_fn} from './predict';
 
 

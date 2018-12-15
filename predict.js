@@ -1,8 +1,7 @@
 
 import * as tf from '@tensorflow/tfjs';
-import {write_status} from './ui';
 import {IMAGENET_CLASSES} from './imagenet_classes';
-import {predictionsElement} from './doc';
+import {predictionsElement, write_status} from './doc';
 
 const TOPK_PREDICTIONS = 10;
 const IMAGE_SIZE = 224;
