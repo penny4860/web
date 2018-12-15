@@ -19,6 +19,7 @@ import * as tf from '@tensorflow/tfjs';
 
 import {IMAGENET_CLASSES} from './imagenet_classes';
 import {status} from './ui';
+import {catElement, filesElement, fileContainerElement, predictionsElement} from './doc';
 
 
 const MOBILENET_MODEL_PATH =
@@ -50,7 +51,7 @@ const mobilenetDemo = async () => {
 
   // Make a prediction through the locally hosted cat.jpg.
   // image element
-  const catElement = document.getElementById('cat');
+  // const catElement = document.getElementById('cat');
   if (catElement.complete && catElement.naturalHeight !== 0) {
     predict(catElement);
     catElement.style.display = '';
@@ -61,7 +62,7 @@ const mobilenetDemo = async () => {
     }
   }
 
-  document.getElementById('file-container').style.display = '';
+  fileContainerElement.style.display = '';
 };
 
 /**
@@ -169,7 +170,7 @@ function showResults(imgElement, classes) {
       predictionContainer, predictionsElement.firstChild);
 }
 
-const filesElement = document.getElementById('files');
+
 filesElement.addEventListener('change', evt => {
   let files = evt.target.files;
   // Display thumbnails & issue call to predict each image.
@@ -202,7 +203,6 @@ filesElement.addEventListener('change', evt => {
 
 
 
-const predictionsElement = document.getElementById('predictions');
 
 
 mobilenetDemo();
