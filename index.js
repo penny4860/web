@@ -52,9 +52,8 @@ const mobilenetDemo = async () => {
   // 4. loading 이 끝나면 message를 지운다.
   write_status('');
 
-  // Make a prediction through the locally hosted cat.jpg.
-  // image element
-  // const catElement = document.getElementById('cat');
+  
+  // 5. Make a prediction through the locally hosted cat.jpg.
   if (catElement.complete && catElement.naturalHeight !== 0) {
     predict_fn(mobilenet, catElement);
     catElement.style.display = '';
@@ -64,8 +63,10 @@ const mobilenetDemo = async () => {
       catElement.style.display = '';
     }
   }
-
   fileContainerElement.style.display = '';
+  
+  // 6. add event
+  addListener(mobilenet);
 };
 
 
@@ -97,8 +98,6 @@ function addListener(model) {
 };
 
 
-
-
 mobilenetDemo();
-write_status('After mobilenetDemo()');
-addListener(mobilenet);
+
+
