@@ -18,7 +18,7 @@
 import * as tf from '@tensorflow/tfjs';
 
 import {IMAGENET_CLASSES} from './imagenet_classes';
-import {status} from './ui';
+import {write_status} from './ui';
 import {catElement, filesElement, fileContainerElement, predictionsElement} from './doc';
 
 
@@ -32,7 +32,7 @@ const TOPK_PREDICTIONS = 10;
 let mobilenet;
 const mobilenetDemo = async () => {
   // 1. 초기 message
-  status('Loading model...');
+  write_status('Loading model...');
 
   // 2. wait : loading 이 끝나기를 기다린다.
   //  mobilenetDemo() 내부 코드는 tf.loadModel(MOBILENET_MODEL_PATH);
@@ -41,13 +41,14 @@ const mobilenetDemo = async () => {
   //  로드가 끝나면 그 뒷라인을 실행한다.
   mobilenet = await tf.loadModel(MOBILENET_MODEL_PATH);
 
-  // Warmup the model. This isn't necessary, but makes the first prediction
-  // faster. Call `dispose` to release the WebGL memory allocated for the return
-  // value of `predict`.
+  // 3. warmup 
+  //  Warmup the model. This isn't necessary, but makes the first prediction
+  //  faster. Call `dispose` to release the WebGL memory allocated for the return
+  //  value of `predict`.
   mobilenet.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
 
-  // 3. loading 이 끝나면 message를 지운다.
-  status('');
+  // 4. loading 이 끝나면 message를 지운다.
+  write_status('');
 
   // Make a prediction through the locally hosted cat.jpg.
   // image element
@@ -70,7 +71,7 @@ const mobilenetDemo = async () => {
  * probabilities of the top K classes.
  */
 async function predict(imgElement) {
-  status('Predicting...');
+  write_status('Predicting...');
 
   const startTime = performance.now();
   const logits = tf.tidy(() => {
@@ -93,7 +94,7 @@ async function predict(imgElement) {
   // Convert logits to probabilities and class names.
   const classes = await getTopKClasses(logits, TOPK_PREDICTIONS);
   const totalTime = performance.now() - startTime;
-  status(`Done in ${Math.floor(totalTime)}ms`);
+  write_status(`Done in ${Math.floor(totalTime)}ms`);
 
   // Show the classes in the DOM.
   showResults(imgElement, classes);
@@ -197,5 +198,5 @@ filesElement.addEventListener('change', evt => {
 });
 
 mobilenetDemo();
-status('After mobilenetDemo()');
+write_status('After mobilenetDemo()');
 

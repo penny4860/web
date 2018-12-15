@@ -8,7 +8,7 @@ const demoStatusElement = document.getElementById('status');
 
 // Define status(msg) function
 // HTML 문서에서 id 를 status 로 지정한 Element에 text를 부여
-const status = msg => demoStatusElement.innerText = msg;
+const write_status = msg => demoStatusElement.innerText = msg;
 /*
 function status(msg) {
   demoStatusElement.innerText = msg;
@@ -16,4 +16,4 @@ function status(msg) {
 }
 */
 
-export {status};
+export {write_status};
