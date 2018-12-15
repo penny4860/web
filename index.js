@@ -17,10 +17,10 @@
 
 import * as tf from '@tensorflow/tfjs';
 
-import {IMAGENET_CLASSES} from './imagenet_classes';
+
 import {write_status} from './ui';
-import {catElement, filesElement, fileContainerElement, predictionsElement} from './doc';
-import {predict} from './predict';
+import {catElement, filesElement, fileContainerElement} from './doc';
+import {predict_fn} from './predict';
 
 
 
@@ -56,11 +56,11 @@ const mobilenetDemo = async () => {
   // image element
   // const catElement = document.getElementById('cat');
   if (catElement.complete && catElement.naturalHeight !== 0) {
-    predict(catElement);
+    predict_fn(mobilenet, catElement);
     catElement.style.display = '';
   } else {
     catElement.onload = () => {
-      predict(catElement);
+      predict_fn(mobilenet, catElement);
       catElement.style.display = '';
     }
   }
@@ -86,7 +86,7 @@ filesElement.addEventListener('change', evt => {
       img.src = e.target.result;
       img.width = IMAGE_SIZE;
       img.height = IMAGE_SIZE;
-      img.onload = () => predict(img);
+      img.onload = () => predict_fn(mobilenet, img);
     };
 
     // Read in the image file as a data URL.

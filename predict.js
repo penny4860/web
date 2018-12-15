@@ -1,11 +1,17 @@
 
+import * as tf from '@tensorflow/tfjs';
+import {write_status} from './ui';
+import {IMAGENET_CLASSES} from './imagenet_classes';
+import {predictionsElement} from './doc';
+
 const TOPK_PREDICTIONS = 10;
+const IMAGE_SIZE = 224;
 
 /**
  * Given an image element, makes a prediction through mobilenet returning the
  * probabilities of the top K classes.
  */
-async function predict(imgElement) {
+async function predict_fn(mobilenet, imgElement) {
     write_status('Predicting...');
   
     const startTime = performance.now();
@@ -110,4 +116,4 @@ function showResults(imgElement, classes) {
   }
 
 
-export {predict};
+export {predict_fn};
