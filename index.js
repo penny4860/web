@@ -196,16 +196,6 @@ filesElement.addEventListener('change', evt => {
   }
 });
 
-
-
-
-
-
-
-
-
-
 mobilenetDemo();
-
 status('After mobilenetDemo()');
 
