@@ -28,8 +28,14 @@ const TOPK_PREDICTIONS = 10;
 
 let mobilenet;
 const mobilenetDemo = async () => {
+  // 1. 초기 message
   status('Loading model...');
 
+  // 2. wait : loading 이 끝나기를 기다린다.
+  //  mobilenetDemo() 내부 코드는 tf.loadModel(MOBILENET_MODEL_PATH);
+  //  가 끝난 다음에 실행된다.
+  //  단, thread의 제어권은 mobilenetDemo() 밖의 코드를 실행하다가
+  //  로드가 끝나면 그 뒷라인을 실행한다.
   mobilenet = await tf.loadModel(MOBILENET_MODEL_PATH);
 
   // Warmup the model. This isn't necessary, but makes the first prediction
@@ -37,9 +43,11 @@ const mobilenetDemo = async () => {
   // value of `predict`.
   mobilenet.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
 
+  // 3. loading 이 끝나면 message를 지운다.
   status('');
 
   // Make a prediction through the locally hosted cat.jpg.
+  // image element
   const catElement = document.getElementById('cat');
   if (catElement.complete && catElement.naturalHeight !== 0) {
     predict(catElement);
@@ -74,7 +82,9 @@ async function predict(imgElement) {
     const batched = normalized.reshape([1, IMAGE_SIZE, IMAGE_SIZE, 3]);
 
     // Make a prediction through mobilenet.
-    return mobilenet.predict(batched);
+    // preds = mobilenet.predict(batched); 
+    // return preds;
+    return mobilenet.predict(batched); 
   });
 
   // Convert logits to probabilities and class names.
@@ -94,6 +104,9 @@ async function predict(imgElement) {
  */
 export async function getTopKClasses(logits, topK) {
   const values = await logits.data();
+
+  console.log("length: ", values.length);
+  console.log("values: ", values);
 
   const valuesAndIndices = [];
   for (let i = 0; i < values.length; i++) {
@@ -180,9 +193,12 @@ filesElement.addEventListener('change', evt => {
   }
 });
 
+
 // document.getElementById :  id 속성이 주어진 문자열과 일치하는 요소를 나타내는 Element 객체를 반환
 // html document : Get <tag id == "status">
 const demoStatusElement = document.getElementById('status');
+
+
 
 // Define status(msg) function
 // HTML 문서에서 id 를 status 로 지정한 Element에 text를 부여
@@ -194,6 +210,11 @@ function status(msg) {
 }
 */
 
+
 const predictionsElement = document.getElementById('predictions');
 
+
 mobilenetDemo();
+
+status('After mobilenetDemo()');
+
