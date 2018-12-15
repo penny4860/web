@@ -69,31 +69,36 @@ const mobilenetDemo = async () => {
 };
 
 
-filesElement.addEventListener('change', evt => {
-  let files = evt.target.files;
-  // Display thumbnails & issue call to predict each image.
-  for (let i = 0, f; f = files[i]; i++) {
-    // Only process image files (skip non image files)
-    if (!f.type.match('image.*')) {
-      continue;
+function addListener(model) {
+  filesElement.addEventListener('change', evt => {
+    let files = evt.target.files;
+    // Display thumbnails & issue call to predict each image.
+    for (let i = 0, f; f = files[i]; i++) {
+      // Only process image files (skip non image files)
+      if (!f.type.match('image.*')) {
+        continue;
+      }
+      let reader = new FileReader();
+      const idx = i;
+      // Closure to capture the file information.
+      reader.onload = e => {
+        // Fill the image & call predict.
+        let img = document.createElement('img');
+        img.src = e.target.result;
+        img.width = IMAGE_SIZE;
+        img.height = IMAGE_SIZE;
+        img.onload = () => predict_fn(model, img);
+      };
+  
+      // Read in the image file as a data URL.
+      reader.readAsDataURL(f);
     }
-    let reader = new FileReader();
-    const idx = i;
-    // Closure to capture the file information.
-    reader.onload = e => {
-      // Fill the image & call predict.
-      let img = document.createElement('img');
-      img.src = e.target.result;
-      img.width = IMAGE_SIZE;
-      img.height = IMAGE_SIZE;
-      img.onload = () => predict_fn(mobilenet, img);
-    };
+  });
+};
 
-    // Read in the image file as a data URL.
-    reader.readAsDataURL(f);
-  }
-});
+
+
 
 mobilenetDemo();
 write_status('After mobilenetDemo()');
-
+addListener(mobilenet);
