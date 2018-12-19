@@ -70,8 +70,7 @@ const mobilenetDemo = async () => {
 
 function addListener(model) {
 
-  // event handle 함수를 등록 : target.addEventListener(type, handle_fn)
-  filesElement.addEventListener('change', evt => {
+  var evt_fn = evt => {
     let files = evt.target.files;
     // Display thumbnails & issue call to predict each image.
     for (let i = 0, f; f = files[i]; i++) {
@@ -94,7 +93,11 @@ function addListener(model) {
       // Read in the image file as a data URL.
       reader.readAsDataURL(f);
     }
-  });
+  }
+
+  // event handle 함수를 등록 : target.addEventListener(type, handle_fn)
+  filesElement.addEventListener('change', evt_fn);
+
 };
 
 
