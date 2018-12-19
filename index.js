@@ -69,6 +69,8 @@ const mobilenetDemo = async () => {
 
 
 function addListener(model) {
+
+  // event handle 함수를 등록 : target.addEventListener(type, handle_fn)
   filesElement.addEventListener('change', evt => {
     let files = evt.target.files;
     // Display thumbnails & issue call to predict each image.
